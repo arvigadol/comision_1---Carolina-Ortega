@@ -1,0 +1,18 @@
+.notfound {
+  padding-top: 5em;
+  padding-right: 30em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  place-content: center;
+}
+
+.container {
+  background: linear-gradient(to left, transparent, mistyrose), url("https://static.vecteezy.com/system/resources/thumbnails/008/024/321/small/silhouette-of-palm-trees-beautiful-sunset-on-the-tropical-sea-beach-background-for-travel-in-holiday-relax-time-photo.jpg");
+  background-color: transparent;
+  height: 100vh;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+}

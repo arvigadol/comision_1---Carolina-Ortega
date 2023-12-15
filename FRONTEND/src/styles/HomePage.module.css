@@ -1,0 +1,9 @@
+.container {
+  background-image: url("https://viajareamaldivas.com/wp-content/uploads/2020/07/viajar-con-pareja.jpg");
+  background-color: #cccccc;
+  height: 500px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
