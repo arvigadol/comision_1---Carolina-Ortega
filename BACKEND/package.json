@@ -1,0 +1,31 @@
+{
+  "name": "comision_1---carolina-ortega",
+  "version": "1.0.0",
+  "description": "BACKEND para el blog de viajes",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arvigadol/comision_1---Carolina-Ortega.git"
+  },
+  "author": "Carolina Ortega",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arvigadol/comision_1---Carolina-Ortega/issues"
+  },
+  "homepage": "https://github.com/arvigadol/comision_1---Carolina-Ortega#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-validator": "^7.0.1",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.0.3",
+    "morgan": "^1.10.0"
+  }
+}
