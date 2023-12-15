@@ -8,6 +8,15 @@ const app = express();
 
 import { env } from "./src/settings/config.js";
 import { startConnection } from "./src/settings/database.js";
+import { authHeader } from './src/models/validations/auth.validation.js';
+import { validateToken } from "./src/middlewares/validateToken.js";
+
+//Enrutadores
+import { authRouter } from './src/routes/auth.routes.js';
+import { commentRouter } from './src/routes/comment.routes.js';
+import { postRouter } from './src/routes/post.routes.js';
+import { userRouter } from "./src/routes/user.routes.js";
+import { homeRouter } from "./src/routes/home.routes.js";
 
 //Middlewares
 app.use(express.json());
