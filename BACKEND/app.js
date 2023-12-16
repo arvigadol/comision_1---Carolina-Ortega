@@ -36,5 +36,5 @@ app.use('/api/comments', authHeader, validateToken, commentRouter);
 
 app.listen(env.port, async () => {
     await startConnection({ uri: env.mongo, database: env.database });
-    console.log(`Servidor corriendo en http://127.0.0.0:${env.port}`)
+    console.log(`Servidor corriendo en http://localhost:${env.port}`)
 });
