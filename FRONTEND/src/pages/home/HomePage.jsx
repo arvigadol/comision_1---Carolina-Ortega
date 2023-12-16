@@ -3,16 +3,15 @@ import styles from "../../styles/HomePage.module.css";
 const HomePage = () => {
   return (
     <div className={styles.container}>
-      <div className="col-sm-6 offset-3">
-        {" "}
-        <h1>Home Page</h1>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam
-          labore placeat repellendus earum eum obcaecati tempora ipsum ab magnam
-          impedit, quod dolores eos soluta voluptatum eveniet fuga eius.
-          Laborum, quasi?
-        </p>
-      </div>
+      <h1 className={styles.titulo}>¡Bienvenido a tu lugar en el mundo!</h1>
+      &nbsp;
+      <p className={styles.parrafo}>
+        Sabemos que no hay placer más grande que viajar. ¡Y lo lindo que es
+        compartir nuestras experiencias y vivencias! Es por ello que creamos
+        este sitio, para que puedas compartir con todxs tus recuerdos y momentos
+        vividos recorriendo el mundo.
+      </p>
+      <p className={styles.nosvemos}>¡Nos vemos adentro!</p>
     </div>
   );
 };

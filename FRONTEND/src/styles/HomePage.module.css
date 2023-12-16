@@ -5,5 +5,37 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  position: relative;
+}
+
+.titulo {
+  display: flex;
+  color: rgb(231, 225, 213);
+  justify-content: center;
+  padding-bottom: 0.5em;
+  border: #cccccc;
+  background-color: black;
+}
+
+.parrafo {
+  display: flex;
+  color: rgb(231, 225, 213);
+  padding: 1em;
+  justify-content: start;
+  font-size: 15px;
+  width: 300px;
+  border: #cccccc;
+  border-radius: 3px;
+  background-color: black;
+}
+
+.nosvemos {
+  display: flex;
+  color: rgb(231, 225, 213);
+  justify-content: end;
+  font-size: 30px;
+  margin-left: 77%;
+  margin-right: 1%;
+  border: #cccccc;
+  border-radius: 3px;
+  background-color: black;
 }
