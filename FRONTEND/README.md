@@ -1,8 +1,3 @@
-# React + Vite
+Falta lograr filtrar en la base de datos para que traiga sólo los posts del usuario en la ruta /posts, hay que cambiar el controlador, hacer uno nuevo o una lógica dentro del que ya está
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
