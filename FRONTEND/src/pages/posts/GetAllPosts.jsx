@@ -1,22 +1,36 @@
 import styles from "../../styles/PostsPages.module.css";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { API_URL } from "../../utils/consts";
 import PostFiltrado from "../../components/PostFiltrado";
+import { AuthContext } from "../../providers/AuthProvider";
+import { Link } from "react-router-dom";
 
-function GetBlog() {
+const token = localStorage.getItem("token");
+
+function GetAllPosts() {
   const [posts, setPosts] = useState([]);
 
+  const { auth } = useContext(AuthContext);
+
   const getPost = useCallback(() => {
-    fetch(`${API_URL}/blog`)
-      .then((res) => res.json())
-      .then((data) => setPosts(data))
-      .catch((err) => console.log(err));
-  });
+    !token ? (
+      <Link to="/login"></Link>
+    ) : (
+      fetch(`${API_URL}/posts`, {
+        headers: {
+          Authorization: token,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => setPosts(data))
+        .catch((err) => console.log(err))
+    );
+  }, [token]);
 
   useEffect(() => {
     getPost();
-  }, []);
+  }, [auth, getPost]);
 
   return (
     <div className={styles.containerposts}>
@@ -39,4 +53,4 @@ function GetBlog() {
     </div>
   );
 }
-export default GetBlog;
+export default GetAllPosts;

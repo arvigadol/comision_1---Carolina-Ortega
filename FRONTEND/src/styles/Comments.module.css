@@ -1,5 +1,15 @@
+.containercreatepost {
+  background-image: url("https://imagenes.20minutos.es/files/image_1920_1080/uploads/imagenes/2023/04/20/free-tour-viajes-expres-gratis.jpeg");
+  background-color: #cccccc;
+  height: 500px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
 .form {
-  display: grid;
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -13,7 +23,7 @@
 .inputGroup {
   display: flex;
   flex-direction: column;
-  width:  100%;
+  width: 100%;
 }
 
 .inputGroup > input {
@@ -41,15 +51,3 @@
 .form > button:hover {
   background-color: #eee;
 }
-
-.containerauth {
-  background-image: url("https://img.freepik.com/fotos-premium/viaje-vamos-viaje-concepto-signo-texto-mapa-pasion-viajes-hipster-plano-lay-pasaporte-brujula-gafas-camara-tubo-sobre-fondo-madera-negro-vista-superior-planificacion-vacaciones-explorar_250813-7701.jpg");
-  background-color: #cccccc;
-  height: 100vh;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-}
-
-

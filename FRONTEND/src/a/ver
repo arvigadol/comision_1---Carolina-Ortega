@@ -1,0 +1,79 @@
+
+<p>
+    {post.comments.map((comment) => {
+      return <GetAllPostComments getPost={getPost} post={post} />;
+    })}{" "}
+  </p>
+
+  {post.comments.map((comment) => {
+    return (
+      <div key={comment._id}>
+        <h2>{comment.description}</h2>
+        <p>Autor del comentario: {post.author.username}</p></div>)})}
+
+
+        const updatedPost = {
+          title: post.title,
+          description: post.description,
+          imageURL: post.imageURL,
+          postId: post._id,
+        };
+
+        const [title, setTitle] = useState('');
+        const [description, setDescription] = useState('');
+        const [imageURL, setImageURL] = useState('');
+        const getPostIndiv = useCallback(() => {
+          !token ? (
+            <Link to="/login"></Link>
+          ) : (
+            fetch(`${API_URL}/posts/${postId}`, {
+              headers: {
+                Authorization: token,
+              },
+            })
+              .then((res) => {
+                if (res.status !== 200) return alert("Error getting post");
+                return res.json();
+              })
+              .then((data) => {
+                setPostindiv(data);
+              })
+              .catch((err) => console.log(err))
+          );
+        }, [token]);
+      
+        useEffect(() => {
+          getPostIndiv();
+        }, [postId, getPostIndiv]);
+      
+        <picture>
+          <img src={post.imageURL} alt={post.author.username} />
+        </picture>
+        <section>
+          <h2>{post.title}</h2>
+          <p>{post.description}</p>
+          <p>
+            <b>Author: {post.author.username} </b>
+          </p>
+          <p>Comentarios del post: {post.comments.length}</p>
+          <p>Creado: {creado}</p>
+          <p>Modificado: {modificado}</p>
+        </section>
+
+
+<div className="card mb-3" style="max-width: 540px;">
+
+</div>
+
+{/*<div className={styles.createcomment}>
+        <form onSubmit={handleCreateNewComment} ref={formRef}>
+          <div>
+            <textarea type="text" name="description" placeholder="comment" />
+            &nbsp; &nbsp;
+            <button className="btn btn-primary">Comentar</button>
+          </div>
+        </form>
+  </div>*/}
+
+
+  to={"http://127.0.0.1:4001/posts"}

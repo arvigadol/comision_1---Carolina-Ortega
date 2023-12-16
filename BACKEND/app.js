@@ -11,7 +11,6 @@ import { startConnection } from "./src/settings/database.js";
 import { authHeader } from './src/models/validations/auth.validation.js';
 import { validateToken } from "./src/middlewares/validateToken.js";
 
-//Enrutadores
 import { authRouter } from './src/routes/auth.routes.js';
 import { commentRouter } from './src/routes/comment.routes.js';
 import { postRouter } from './src/routes/post.routes.js';
@@ -29,8 +28,13 @@ app.use(helmet({
     contentSecurityPolicy: false
 }));
 
-//Conexión al servidor y la base de datos
+app.use('/api', homeRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/users', userRouter);
+app.use('/api/posts', authHeader, validateToken, postRouter);
+app.use('/api/comments', authHeader, validateToken, commentRouter);
+
 app.listen(env.port, async () => {
     await startConnection({ uri: env.mongo, database: env.database });
-    console.log(`Servidor corriendo en http://localhost:${env.port}`)
-})
+    console.log(`Servidor corriendo en http://127.0.0.0:${env.port}`)
+});
