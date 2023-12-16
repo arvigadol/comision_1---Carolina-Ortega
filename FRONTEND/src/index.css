@@ -17,9 +17,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
- 
-  place-content: center;
+  
   min-height: 100vh;
 }
 
