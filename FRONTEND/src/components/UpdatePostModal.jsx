@@ -28,9 +28,9 @@ const UpdatePostModal = ({ post, postId, getPost }) => {
           icon: "error",
           title: "Oops...",
           text: "Error al modificar la publicación",
-          footer: '<a href="#">Why do I have this issue?</a>',
         });
 
+      ref.current.click();
       Swal.fire({
         position: "center",
         icon: "success",
@@ -38,8 +38,6 @@ const UpdatePostModal = ({ post, postId, getPost }) => {
         showConfirmButton: false,
         timer: 1500,
       });
-
-      ref.current.click();
       getPost();
     });
   };

@@ -38,8 +38,13 @@ function LoginUser() {
 
     if (req.status !== 200) {
       ref.current.reset();
-      return alert("Error al iniciar sesión");
+      return Swal.fire({
+        icon: "error",
+        title: "Hubo un error en el inicio de sesión",
+        text: "Por favor, revisa tus datos e intentalo nuevamente",
+      });
     }
+
     const res = await req.json();
     login(res);
     ref.current.reset();

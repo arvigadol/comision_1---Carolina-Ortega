@@ -34,11 +34,12 @@ function RegisterUser() {
       },
     });
 
-    if (req.status !== 201) Swal.fire({
-      icon: "error",
-      title: "Oops...",
-      text: "Error al realizar el registro",
-    });
+    if (req.status !== 201)
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Error al realizar el registro",
+      });
     ref.current.reset();
     Swal.fire("¡Bienvenidx! Te registraste exitosamente");
     navigate("/login");
@@ -58,7 +59,7 @@ function RegisterUser() {
               />
             </div>
             <div className={styles.inputGroup}>
-            <label htmlFor="email">Ingresa tu correo electrónico</label>
+              <label htmlFor="email">Ingresa tu correo electrónico</label>
               <input
                 type="email"
                 placeholder="my-email@email.com"
@@ -66,11 +67,11 @@ function RegisterUser() {
               />
             </div>
             <div className={styles.inputGroup}>
-            <label htmlFor="password">Ingresa tu nombre de usuario</label>
+              <label htmlFor="password">Ingresa tu nombre de usuario</label>
               <input type="text" placeholder="Joe Doe" name="username" />
             </div>
             <div className={styles.inputGroup}>
-            <label htmlFor="password">Ingresa tu contraseña</label>
+              <label htmlFor="password">Ingresa tu contraseña</label>
               <input type="password" placeholder="*******" name="password" />
             </div>
             <button>Register</button>

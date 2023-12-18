@@ -28,6 +28,8 @@ function GetAllPosts() {
     );
   }, [token]);
 
+  posts.reverse();
+  
   useEffect(() => {
     getPost();
   }, [auth, getPost]);

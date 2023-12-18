@@ -26,11 +26,13 @@ const CreateCommentModal = ({ getPost }) => {
         Authorization: token,
       },
     }).then((res) => {
-      if (!res.ok) Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Error al crear el comentario",
-      });
+      if (!res.ok) {
+        return Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Error al crear el comentario",
+        });
+      }
       getPost();
     });
 
@@ -45,7 +47,7 @@ const CreateCommentModal = ({ getPost }) => {
       timer: 1500,
     });
   };
-  
+
   return (
     <div
       className="modal fade"
@@ -70,10 +72,7 @@ const CreateCommentModal = ({ getPost }) => {
             ></button>
           </div>
           <div className="modal-body">
-            <form
-              id="form_modal"
-              ref={formRef}
-            >
+            <form id="form_modal" ref={formRef}>
               <label htmlFor="description">Description:</label>
               &nbsp; &nbsp;
               <input type="text" name="description" />

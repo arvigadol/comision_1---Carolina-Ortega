@@ -18,6 +18,8 @@ function GetBlog() {
     getPost();
   }, []);
 
+  posts.reverse();
+
   return (
     <div className={styles.containerposts}>
       <div className="col-sm-6 offset-3">

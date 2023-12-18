@@ -13,15 +13,16 @@ const DeleteCommentModal = ({ postId, getPost }) => {
         Authorization: token,
       },
     }).then((res) => {
-      if (!res.ok) Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Error al eliminar el comentario",
-      });
+      if (!res.ok) {
+        return Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Error al eliminar el comentario",
+        });
+      }
       getPost();
     });
   };
-
 
   return (
     <div
@@ -55,7 +56,10 @@ const DeleteCommentModal = ({ postId, getPost }) => {
             >
               Close
             </button>
-            <Link onClick={handleDeleteComment} to={"http://127.0.0.1:4001/posts"}>
+            <Link
+              onClick={handleDeleteComment}
+              to={"http://127.0.0.1:4001/posts"}
+            >
               <li className="btn btn-danger">Eliminar</li>
             </Link>
           </div>

@@ -8,7 +8,7 @@ import { API_URL } from "../utils/consts";
 const PostIndividualOnePost = ({ post, getPost, onClick }) => {
   const navigate = useNavigate();
   const modalId = useId();
-  const {postId} = useParams()
+  const { postId } = useParams();
 
   const dia_creado = new Date(post.createdAt).toLocaleDateString();
   const hora_creado = new Date(post.createdAt).toLocaleTimeString();
@@ -25,33 +25,28 @@ const PostIndividualOnePost = ({ post, getPost, onClick }) => {
     }
   }
   const handleDelete = async (e) => {
-
     await fetch(`${API_URL}/posts/${postId}`, {
       method: "DELETE",
       headers: {
-        Authorization: token,
+        Authorization: localStorage.getItem("token"),
       },
-    }).then((res) => {
-      console.log(res)
-      if (res.status !== 200) {
-        return Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Error al eliminar la publicación",
-        });
-      }
-    }).then((res) => {
-      Swal.fire({
-        title: "¡Eliminada!",
-        text: "La publicación se eliminó correctamente",
-        icon: "success"
-      });
-      navigate("/posts")
-      //window.location.reload();
     })
+      .then((res) => {
+        if (res.status !== 200) {
+          return Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Error al eliminar la publicación",
+          });
+        }
+      })
+      .then((res) => {
+        navigate("/posts");
+        //window.location.reload();
+      });
   };
-  
-console.log(post)
+
+  console.log(post);
   return (
     <div
       key={post._id}
@@ -109,19 +104,31 @@ console.log(post)
             />
             &nbsp;
             <Link
-              onClick={handleDelete}
-              to={"http://127.0.0.1:4001/posts"}
-              //data-bs-toggle="modal"
-              //data-bs-target={"#modal-delete" + post._id}
+              onClick={() =>
+                Swal.fire({
+                  title: "¿Estás segurx?",
+                  text: "Esta acción no se puede deshacer",
+                  icon: "warning",
+                  showCancelButton: true,
+                  confirmButtonColor: "#3085d6",
+                  cancelButtonColor: "#d33",
+                  confirmButtonText: "¡Si, eliminar!",
+                }).then((res) => {
+                  if (res.isConfirmed) {
+                    Swal.fire({
+                      title: "¡Eliminada!",
+                      text: "La publicación se eliminó correctamente",
+                      icon: "success",
+                    });
+                    handleDelete();
+                  } else {
+                    navigate("/posts");
+                  }
+                })
+              }
             >
               <li className="btn btn-danger">Eliminar</li>
             </Link>
-            {/* <DeletePostModal
-              getPost={getPost}
-              modalId={modalId}
-              postId={post._id}
-              post={post}
-            /> */}
           </section>
           <hr className="mt-4" />
         </>

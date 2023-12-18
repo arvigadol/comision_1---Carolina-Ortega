@@ -35,13 +35,16 @@ const CreatePost = () => {
       },
     });
 
-    if (req.status !== 201) Swal.fire({
+    if (req.status !== 201) {
+      return (
+      Swal.fire({
       icon: "error",
       title: "Oops...",
       text: "Error al crear la publicación",
-    });
+    })
+    )}
     ref.current.reset();
-
+    
     Swal.fire({
       position: "center",
       icon: "success",

@@ -3,7 +3,7 @@ import { API_URL } from "../../utils/consts";
 
 const token = localStorage.getItem("token");
 
-const UpdateCommentModal = ({postId, getPost }) => {
+const UpdateCommentModal = ({ postId, getPost }) => {
   const labelId = useId();
   const ref = useRef(null);
 
@@ -21,12 +21,16 @@ const UpdateCommentModal = ({postId, getPost }) => {
         Authorization: token,
       },
     }).then((res) => {
-        console.log(res)
-      if (!res.ok) Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Error al modificar la comentario",
-      });
+      console.log(res);
+      if (!res.ok) {
+        return Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "¡Comentario actualizado con éxito!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
       getPost();
     });
     //ref.current.click();
@@ -57,9 +61,7 @@ const UpdateCommentModal = ({postId, getPost }) => {
             ></button>
           </div>
           <div className="modal-body">
-            <form
-              id="form_modal"
-            >
+            <form id="form_modal">
               <label htmlFor="description">Comentario:</label>
               &nbsp; &nbsp;
               <input type="text" name="description" />
