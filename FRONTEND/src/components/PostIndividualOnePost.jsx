@@ -1,8 +1,6 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
-import GetAllPostComments from "../pages/comments/GetAllPostComments";
 import { useId, useRef } from "react";
 import UpdatePostModal from "./UpdatePostModal";
-import DeletePostModal from "./DeletePostModal";
 import { API_URL } from "../utils/consts";
 
 const PostIndividualOnePost = ({ post, getPost, onClick }) => {
@@ -28,7 +26,7 @@ const PostIndividualOnePost = ({ post, getPost, onClick }) => {
     await fetch(`${API_URL}/posts/${postId}`, {
       method: "DELETE",
       headers: {
-        Authorization: localStorage.getItem("token"),
+        Authorization: token,
       },
     })
       .then((res) => {

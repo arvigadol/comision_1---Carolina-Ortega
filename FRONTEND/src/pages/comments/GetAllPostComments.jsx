@@ -1,7 +1,7 @@
 import styles from "../../styles/Comments.module.css";
 
 import { useEffect, useId, useRef, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { API_URL } from "../../utils/consts";
 import CreateCommentModal from "./CreateCommentModal";
 import UpdateCommentModal from "./UpdateCommentModal";
@@ -15,7 +15,7 @@ const GetAllPostComments = () => {
   const { postId } = useParams();
 
   const [post, setPost] = useState(null);
-
+  const navigate = useNavigate();
   const formRef = useRef(null);
 
   const getPost = () => {
@@ -25,11 +25,12 @@ const GetAllPostComments = () => {
       },
     })
       .then((res) => {
-        if (res.status !== 200) Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Error al mostrar los comentarios de la publicación",
-        });
+        if (res.status !== 200)
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Error al mostrar los comentarios de la publicación",
+          });
 
         return res.json();
       })
@@ -42,7 +43,6 @@ const GetAllPostComments = () => {
     getPost();
   }, [postId]);
 
-  
   const handleDeleteComment = (commentId) => {
     fetch(`${API_URL}/comments/${postId}/${commentId}`, {
       method: "DELETE",
@@ -52,29 +52,9 @@ const GetAllPostComments = () => {
     }).then((res) => {
       if (!res.ok) return alert("Error deleting comment");
       getPost();
-
-      Swal.fire({
-        title: "¿Estás seguro?",
-        text: "Esta acción no se puede deshacer",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "¡Si, eliminar!"
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.fire({
-            title: "¡Eliminado!",
-            text: "El comentario se eliminó correctamente",
-            icon: "success"
-          });
-        }
-      });
-
       //window.location.reload();
     });
   };
-
 
   if (!post) return <h1>Loading...</h1>;
 
@@ -148,19 +128,30 @@ const GetAllPostComments = () => {
               />
               &nbsp;
               <Link
-                onClick={() => handleDeleteComment(comment._id)}
-                 
-                //data-bs-toggle="modal"
-                //data-bs-target={"#modal-deletecomment" + post._id}
+                onClick={() =>
+                  Swal.fire({
+                    title: "¿Estás seguro?",
+                    text: "Esta acción no se puede deshacer",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "¡Si, eliminar!",
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      Swal.fire({
+                        title: "¡Eliminado!",
+                        text: "El comentario se eliminó correctamente",
+                        icon: "success",
+                      });
+                      handleDeleteComment(comment._id);
+                      navigate("/posts");
+                    }
+                  })
+                }
               >
                 <li className="btn btn-danger">Eliminar</li>
               </Link>
-              {/*<DeleteCommentModal
-                key={post._id}
-                getPost={getPost}
-                modalId={modalId}
-                postId={post._id}
-              />*/}
             </div>
             <br />
           </div>
