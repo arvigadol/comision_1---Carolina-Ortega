@@ -12,6 +12,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 import { Link, useParams } from "react-router-dom";
 import { API_URL } from "../../utils/consts";
 import PostIndividualOnePost from "../../components/PostIndividualOnePost";
+import GetAllPostComments from "../comments/GetAllPostComments";
 
 const token = localStorage.getItem("token");
 
@@ -62,6 +63,7 @@ function GetOnePost(posts, e) {
         }}
       >
         <PostIndividualOnePost getPost={getPost} key={post._id} post={post} />
+        <GetAllPostComments getPost={getPost} key={post._id} post={post} />
       </div>
     </div>
   );

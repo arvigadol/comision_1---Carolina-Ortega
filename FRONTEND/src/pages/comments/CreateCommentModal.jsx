@@ -4,7 +4,7 @@ import { API_URL } from "../../utils/consts";
 
 const token = localStorage.getItem("token");
 
-const CreateCommentModal = ({ getPost }) => {
+const CreateCommentModal = ({ getPost, post }) => {
   const labelId = useId();
   const ref = useRef(null);
   const { postId } = useParams();
@@ -73,9 +73,9 @@ const CreateCommentModal = ({ getPost }) => {
           </div>
           <div className="modal-body">
             <form id="form_modal" ref={formRef}>
-              <label htmlFor="description">Description:</label>
-              &nbsp; &nbsp;
-              <input type="text" name="description" />
+              <label htmlFor="description">Haz un comentario:</label>
+              <br /><br />
+              <textarea type="text" name="description" />
               &nbsp; &nbsp;
             </form>
           </div>
@@ -90,11 +90,12 @@ const CreateCommentModal = ({ getPost }) => {
             </button>
             <button
               type="button"
-              className="btn btn-primary"
+              className="btn btn-success"
               onClick={handleCreateNewComment}
             >
               Comentar
-            </button>
+            </button>          
+
           </div>
         </div>
       </div>

@@ -5,7 +5,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { API_URL } from "../../utils/consts";
 import CreateCommentModal from "./CreateCommentModal";
 import UpdateCommentModal from "./UpdateCommentModal";
-import DeleteCommentModal from "./DeleteCommentModal";
+import { HiOutlinePencilAlt, HiOutlineTrash } from "react-icons/hi";
 
 const token = localStorage.getItem("token");
 
@@ -25,17 +25,21 @@ const GetAllPostComments = () => {
       },
     })
       .then((res) => {
-        if (res.status !== 200)
-          Swal.fire({
+        if (!res.ok) {
+          return Swal.fire({
+            position: "center",
             icon: "error",
-            title: "Oops...",
-            text: "Error al mostrar los comentarios de la publicación",
+            title: "Error al mostrar los comentarios de la publicación",
+            showConfirmButton: false,
+            timer: 1500,
           });
+        }
 
         return res.json();
       })
-      .then((data) => {
-        setPost(data);
+      .then((res) => {
+        setPost(res);
+        console.log(post);
       });
   };
 
@@ -50,9 +54,16 @@ const GetAllPostComments = () => {
         Authorization: token,
       },
     }).then((res) => {
-      if (!res.ok) return alert("Error deleting comment");
+      if (!res.ok) {
+        return Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "Error al eliminar el comentario",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
       getPost();
-      //window.location.reload();
     });
   };
 
@@ -82,6 +93,7 @@ const GetAllPostComments = () => {
       </section>
 
       <br />
+
       {post.comments.map((comment) => {
         return (
           <div key={comment._id} className={styles.cardybotones}>
@@ -91,7 +103,7 @@ const GetAllPostComments = () => {
                   <img
                     src={post.author.avatarURL}
                     className="img-fluid rounded-start"
-                    alt="..."
+                    alt="Imagen del autor o autora del comentario"
                   />
                 </div>
                 <div className="col-md-8">
@@ -100,32 +112,32 @@ const GetAllPostComments = () => {
                       {post.author.username} comentó
                     </h5>
                     <p className="card-text">{comment.description}</p>
-                    <p className="card-text">
-                      <small className="text-body-secondary">
-                        Last updated 3 mins ago
-                      </small>
-                    </p>
+                    <p>{comment.commentId}</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className={styles.botones}>
+            <div
+              class="btn-group-vertical"
+              role="group"
+              aria-label="Vertical button group"
+            >
               <Link
                 onClick={(e) => {
                   e.stopPropagation();
                 }}
-                data-bs-toggle="modal"
-                data-bs-target={"#modal-updatecomment" + post._id}
+                //data-bs-toggle="modal"
+                // data-bs-target={"#modal-updatecomment" + post._id}
               >
-                <li className="btn btn-success">Editar</li>
+                <HiOutlinePencilAlt className={styles.botoneditar} />
               </Link>
-              <UpdateCommentModal
+              {/* <UpdateCommentModal
                 key={post._id}
                 getPost={getPost}
                 modalId={modalId}
                 postId={post._id}
-              />
+              /> */}
               &nbsp;
               <Link
                 onClick={() =>
@@ -145,12 +157,12 @@ const GetAllPostComments = () => {
                         icon: "success",
                       });
                       handleDeleteComment(comment._id);
-                      navigate("/posts");
+                      windows.location.reload();
                     }
                   })
                 }
               >
-                <li className="btn btn-danger">Eliminar</li>
+                <HiOutlineTrash className={styles.botoneliminar} />
               </Link>
             </div>
             <br />

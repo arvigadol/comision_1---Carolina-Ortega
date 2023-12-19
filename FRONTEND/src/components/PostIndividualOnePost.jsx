@@ -22,7 +22,7 @@ const PostIndividualOnePost = ({ post, getPost, onClick }) => {
       return false;
     }
   }
-  const handleDelete = async (e) => {
+  const handleDeletePost = async (e) => {
     await fetch(`${API_URL}/posts/${postId}`, {
       method: "DELETE",
       headers: {
@@ -44,7 +44,6 @@ const PostIndividualOnePost = ({ post, getPost, onClick }) => {
       });
   };
 
-  console.log(post);
   return (
     <div
       key={post._id}
@@ -118,9 +117,7 @@ const PostIndividualOnePost = ({ post, getPost, onClick }) => {
                       text: "La publicación se eliminó correctamente",
                       icon: "success",
                     });
-                    handleDelete();
-                  } else {
-                    navigate("/posts");
+                    handleDeletePost();
                   }
                 })
               }
