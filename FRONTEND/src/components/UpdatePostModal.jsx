@@ -1,4 +1,4 @@
-import { useId, useRef} from "react";
+import { useId, useRef } from "react";
 import { API_URL } from "../utils/consts";
 
 const token = localStorage.getItem("token");
@@ -30,7 +30,6 @@ const UpdatePostModal = ({ post, postId, getPost }) => {
           text: "Error al modificar la publicación",
         });
 
-      ref.current.click();
       Swal.fire({
         position: "center",
         icon: "success",
@@ -38,6 +37,7 @@ const UpdatePostModal = ({ post, postId, getPost }) => {
         showConfirmButton: false,
         timer: 1500,
       });
+      ref.current.click();
       getPost();
     });
   };
@@ -102,7 +102,7 @@ const UpdatePostModal = ({ post, postId, getPost }) => {
               data-bs-dismiss="modal"
               ref={ref}
             >
-              Close
+              Cerrar
             </button>
             <button
               type="button"

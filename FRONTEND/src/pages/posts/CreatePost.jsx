@@ -1,6 +1,6 @@
 import styles from "../../styles/CreatePost.module.css";
 
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../../utils/consts";
 
@@ -8,7 +8,6 @@ const token = localStorage.getItem("token");
 
 const CreatePost = () => {
   const ref = useRef(null);
-
   const navigate = useNavigate();
 
   const handleSubmitNuevoPosteo = async (e) => {
@@ -36,15 +35,14 @@ const CreatePost = () => {
     });
 
     if (req.status !== 201) {
-      return (
-      Swal.fire({
-      icon: "error",
-      title: "Oops...",
-      text: "Error al crear la publicación",
-    })
-    )}
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Error al crear la publicación",
+      });
+    }
     ref.current.reset();
-    
+
     Swal.fire({
       position: "center",
       icon: "success",
@@ -52,7 +50,7 @@ const CreatePost = () => {
       showConfirmButton: false,
       timer: 1500,
     });
-    
+
     navigate("/posts");
   };
 

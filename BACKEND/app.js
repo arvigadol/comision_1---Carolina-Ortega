@@ -28,6 +28,7 @@ app.use(helmet({
     contentSecurityPolicy: false
 }));
 
+app.use('/api', homeRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/users', userRouter);
 app.use('/api/posts', authHeader, validateToken, postRouter);

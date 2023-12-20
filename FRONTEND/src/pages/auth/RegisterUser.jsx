@@ -75,6 +75,12 @@ function RegisterUser() {
               <input type="password" placeholder="*******" name="password" />
             </div>
             <button>Register</button>
+            <div>
+              <p>
+                Si ya te has registrado, por favor, inicia sesión{" "}
+                <Link to="/login">Ir a Login</Link>
+              </p>
+            </div>
           </form>
         </div>
       </div>

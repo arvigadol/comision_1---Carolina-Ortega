@@ -1,6 +1,7 @@
-import { useId, useRef } from "react";
+import { useContext, useId, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { API_URL } from "../../utils/consts";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const token = localStorage.getItem("token");
 
@@ -9,6 +10,7 @@ const CreateCommentModal = ({ getPost, post }) => {
   const ref = useRef(null);
   const { postId } = useParams();
   const formRef = useRef(null);
+  const { auth } = useContext(AuthContext);
 
   const handleCreateNewComment = () => {
     const form_id = document.getElementById("form_modal");
@@ -61,9 +63,6 @@ const CreateCommentModal = ({ getPost, post }) => {
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
-            <h1 className="modal-title fs-5" id={labelId}>
-              Editar Post
-            </h1>
             <button
               type="button"
               className="btn-close"
@@ -73,8 +72,11 @@ const CreateCommentModal = ({ getPost, post }) => {
           </div>
           <div className="modal-body">
             <form id="form_modal" ref={formRef}>
-              <label htmlFor="description">Haz un comentario:</label>
-              <br /><br />
+              <label htmlFor="description">
+                <b>Haz un comentario</b>
+              </label>
+              <br />
+              <br />
               <textarea type="text" name="description" />
               &nbsp; &nbsp;
             </form>
@@ -86,7 +88,7 @@ const CreateCommentModal = ({ getPost, post }) => {
               data-bs-dismiss="modal"
               ref={ref}
             >
-              Close
+              Cerrar
             </button>
             <button
               type="button"
@@ -94,8 +96,7 @@ const CreateCommentModal = ({ getPost, post }) => {
               onClick={handleCreateNewComment}
             >
               Comentar
-            </button>          
-
+            </button>
           </div>
         </div>
       </div>

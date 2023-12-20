@@ -5,7 +5,6 @@ import { createUserValidations, loginUserValidations } from "../models/validatio
 const authRouter = Router();
 
 authRouter.post("/register", createUserValidations, ctrlCreateNewUser);
-
 authRouter.post("/login", loginUserValidations, ctrlLoginUser);
 
 export { authRouter };

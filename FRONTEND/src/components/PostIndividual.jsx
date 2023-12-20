@@ -1,17 +1,26 @@
 import { Link, useNavigate } from "react-router-dom";
 
 const PostIndividual = ({ post, getPost, onClick }) => {
-  const navigate = useNavigate();
-
   const dia_creado = new Date(post.createdAt).toLocaleDateString();
   const hora_creado = new Date(post.createdAt).toLocaleTimeString();
   const dia_modificado = new Date(post.updatedAt).toLocaleDateString();
   const hora_modificado = new Date(post.updatedAt).toLocaleTimeString();
 
+  const user = localStorage.getItem("user");
   const token = localStorage.getItem("token");
 
+  const navigate = useNavigate();
+
   function isLoggedIn() {
-    if (token == !undefined || token == !null || token) {
+    if (user && token) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  function locationPosts() {
+    if (location.pathname === "/posts") {
       return true;
     } else {
       return false;
@@ -19,15 +28,14 @@ const PostIndividual = ({ post, getPost, onClick }) => {
   }
 
   return (
-    <div
-      key={post._id}
-      onClick={(e) => {
-        e.stopPropagation();
-      }}
-    >
-      {" "}
-      {isLoggedIn() ? (
-        <>
+    <div>
+      {isLoggedIn() && locationPosts() ? (
+        <div
+          key={post._id}
+          onClick={() => {
+            navigate(`/posts/${post._id}`);
+          }}
+        >
           <div className="card mb-3">
             <div className="card-body">
               <h5 className="card-title text-center fs-1">{post.title}</h5>
@@ -56,29 +64,9 @@ const PostIndividual = ({ post, getPost, onClick }) => {
             </p>
           </div>
           <br />
-          <section className="">
-            <Link
-              onClick={(e) => {
-                e.stopPropagation();
-              }}
-              to={`${post._id}`}
-            >
-              <li className="btn btn-success">Ingresar al post</li>
-            </Link>
-            &nbsp; &nbsp;
-            <Link
-              onClick={(e) => {
-                e.stopPropagation();
-              }}
-              to={`http://127.0.0.1:4001/comments/${post._id}`}
-            >
-              <li className="btn btn-primary">Ver Comentarios</li>
-            </Link>
-          </section>
-          <hr className="mt-4" />
-        </>
+        </div>
       ) : (
-        <>
+        <div key={post._id}>
           <div className="card mb-3">
             <div className="card-body">
               <h5 className="card-title text-center fs-1">{post.title}</h5>
@@ -107,7 +95,7 @@ const PostIndividual = ({ post, getPost, onClick }) => {
             </p>
           </div>
           <br />
-        </>
+        </div>
       )}
     </div>
   );

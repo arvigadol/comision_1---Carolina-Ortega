@@ -11,8 +11,7 @@ import {
 import { AuthContext } from "../../providers/AuthProvider";
 import { Link, useParams } from "react-router-dom";
 import { API_URL } from "../../utils/consts";
-import PostIndividualOnePost from "../../components/PostIndividualOnePost";
-import GetAllPostComments from "../comments/GetAllPostComments";
+import MiPost from "../../components/MiPost";
 
 const token = localStorage.getItem("token");
 
@@ -25,26 +24,22 @@ function GetOnePost(posts, e) {
   const { auth } = useContext(AuthContext);
 
   const getPost = useCallback(() => {
-    !token ? (
-      <Link to="/login"></Link>
-    ) : (
-      fetch(`${API_URL}/posts/${postId}`, {
-        headers: {
-          Authorization: token,
-        },
+    fetch(`${API_URL}/posts/${postId}`, {
+      headers: {
+        Authorization: token,
+      },
+    })
+      .then((res) => {
+        if (res.status !== 200)
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Error al mostrar la publicación",
+          });
+        return res.json();
       })
-        .then((res) => {
-          if (res.status !== 200)
-            Swal.fire({
-              icon: "error",
-              title: "Oops...",
-              text: "Error al mostrar la publicación",
-            });
-          return res.json();
-        })
-        .then((data) => setPost(data))
-        .catch((err) => console.log(err))
-    );
+      .then((data) => setPost(data))
+      .catch((err) => console.log(err));
   }, [token]);
 
   useEffect(() => {
@@ -62,12 +57,10 @@ function GetOnePost(posts, e) {
           e.stopPropagation();
         }}
       >
-        <PostIndividualOnePost getPost={getPost} key={post._id} post={post} />
-        <GetAllPostComments getPost={getPost} key={post._id} post={post} />
+        <MiPost getPost={getPost} key={post._id} post={post} />
       </div>
     </div>
   );
 }
 
 export default GetOnePost;
-

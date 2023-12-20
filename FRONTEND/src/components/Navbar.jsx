@@ -5,9 +5,18 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   const { logout } = useContext(AuthContext);
   const token = localStorage.getItem("token");
+  const user = localStorage.getItem("user");
+
+  // function isLoggedIn() {
+  //   if (token == !undefined || token == !null || token) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
 
   function isLoggedIn() {
-    if (token == !undefined || token == !null || token) {
+    if (user && token) {
       return true;
     } else {
       return false;
@@ -39,13 +48,13 @@ const Navbar = () => {
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to="posts">
+                    <Link className="nav-link" to="blog">
                       Blog
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to="posts/new">
-                      Crear Post
+                    <Link className="nav-link" to="posts">
+                      Mis Posts
                     </Link>
                   </li>
                 </ul>
@@ -86,12 +95,12 @@ const Navbar = () => {
                   </li>
                   <li className="nav-item">
                     <Link className="nav-link" to="/login">
-                    Login
+                      Login
                     </Link>
                   </li>
                   <li className="nav-item">
                     <Link className="nav-link" to="/register">
-                    Register
+                      Register
                     </Link>
                   </li>
                 </ul>

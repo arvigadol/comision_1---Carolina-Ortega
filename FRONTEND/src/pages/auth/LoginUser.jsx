@@ -76,6 +76,11 @@ function LoginUser() {
               />
             </div>
             <button>Login</button>
+            <div>
+              <p>
+                ¿Aún no eres usuario? <Link to="/register">Registrate</Link>
+              </p>
+            </div>
           </form>
         </div>
       </div>

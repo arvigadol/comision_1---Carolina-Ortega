@@ -1,7 +1,7 @@
 import styles from "../../styles/Comments.module.css";
 
-import { useEffect, useId, useRef, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useEffect, useId, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import { API_URL } from "../../utils/consts";
 import CreateCommentModal from "./CreateCommentModal";
 import UpdateCommentModal from "./UpdateCommentModal";
@@ -11,12 +11,9 @@ const token = localStorage.getItem("token");
 
 const GetAllPostComments = () => {
   const modalId = useId();
-  const ref = useRef(null);
   const { postId } = useParams();
 
   const [post, setPost] = useState(null);
-  const navigate = useNavigate();
-  const formRef = useRef(null);
 
   const getPost = () => {
     fetch(`${API_URL}/posts/${postId}`, {
@@ -39,7 +36,6 @@ const GetAllPostComments = () => {
       })
       .then((res) => {
         setPost(res);
-        console.log(post);
       });
   };
 
@@ -119,7 +115,7 @@ const GetAllPostComments = () => {
             </div>
 
             <div
-              class="btn-group-vertical"
+              className="btn-group-vertical"
               role="group"
               aria-label="Vertical button group"
             >
@@ -127,17 +123,17 @@ const GetAllPostComments = () => {
                 onClick={(e) => {
                   e.stopPropagation();
                 }}
-                //data-bs-toggle="modal"
-                // data-bs-target={"#modal-updatecomment" + post._id}
+                data-bs-toggle="modal"
+                data-bs-target={"#modal-updatecomment" + post._id}
               >
                 <HiOutlinePencilAlt className={styles.botoneditar} />
               </Link>
-              {/* <UpdateCommentModal
-                key={post._id}
+              <UpdateCommentModal
+                //key={post._id}
                 getPost={getPost}
                 modalId={modalId}
                 postId={post._id}
-              /> */}
+              />
               &nbsp;
               <Link
                 onClick={() =>
@@ -157,7 +153,6 @@ const GetAllPostComments = () => {
                         icon: "success",
                       });
                       handleDeleteComment(comment._id);
-                      windows.location.reload();
                     }
                   })
                 }

@@ -24,7 +24,7 @@ function GetBlog() {
     <div className={styles.containerposts}>
       <div className="col-sm-6 offset-3">
         <div>
-          <h2>Posts</h2>
+          <h2>Los viajeros dicen...</h2>
           <main>
             <div>
               {posts.length === 0 ? (

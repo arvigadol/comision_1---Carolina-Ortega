@@ -22,7 +22,6 @@ export const ctrlCreatePost = async (req, res) => {
       { $push: { posts: post._id } }
     );
     res.status(201).json(post);
-    
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "No se pudo crear el post" });
@@ -31,14 +30,32 @@ export const ctrlCreatePost = async (req, res) => {
 
 export const ctrlGetAllPosts = async (req, res) => {
   try {
-    const Allposts = await PostModel.find()
+    const posts = await PostModel.find()
       .populate("author", ["username", "avatarURL"])
       .populate("comments", ["description"]);
-    if (!Allposts) {
+    if (!posts) {
       return res.status(404).json({ message: "Aún no hay posts para mostrar" });
     }
 
-    return res.status(200).json(Allposts);
+    return res.status(200).json(posts);
+  } catch (error) {
+    return res.status(500).json({ error: "No se pudieron mostrar los posts" });
+  }
+};
+
+export const ctrlGetMyPosts = async (req, res) => {
+  const userId = req.user._id;
+
+  try {
+    const posts = await PostModel.find({ author: userId })
+      .populate("author", ["username", "avatarURL"])
+      .populate("comments", ["description"]);
+
+    if (!posts) {
+      return res.status(404).json({ message: "Aún no hay posts para mostrar" });
+    }
+
+    return res.status(200).json(posts);
   } catch (error) {
     return res.status(500).json({ error: "No se pudieron mostrar los posts" });
   }

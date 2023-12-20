@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react";
 import PostIndividual from "./PostIndividual";
-import { Link, useNavigate } from "react-router-dom";
 
 const PostFiltrado = ({ posts, getPost }) => {
   // la información que NO vamos a modificar.
   const [search, setSearch] = useState("");
   const [filterPosts, setFilterPosts] = useState(posts);
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     const filtered = posts.filter((post) => {
@@ -32,14 +29,9 @@ const PostFiltrado = ({ posts, getPost }) => {
       <>
         {filterPosts.map((post) => {
           return (
-            <PostIndividual
-              getPost={getPost}
-              key={post._id}
-              post={post}
-              onClick={() => {
-                navigate(`/posts/${post._id}`);
-              }}
-            />
+            <div>
+              <PostIndividual getPost={getPost} key={post._id} post={post} />
+            </div>
           );
         })}
       </>
